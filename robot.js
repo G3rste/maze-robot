@@ -1,67 +1,52 @@
 class Robot {
-    constructor(maze, position) {
+    constructor(maze, x, y, direction) {
         this.maze = maze;
-        this.position = position;
+        this.x = x;
+        this.y = y;
+        this.direction = direction; //0 - left, 1 - up, 2 - right, 3 - down
         this.renderIndex = 0;
-        this.updatePosition();
+        this.renderAsync();
     }
 
     turnRight() {
-        this.position.turnRight();
-        this.updatePosition();
+        this.direction = (this.direction + 1) % 4;
+        this.renderAsync();
     }
 
     turnLeft() {
-        this.position.turnLeft();
-        this.updatePosition();
+        this.direction = (this.direction + 3) % 4;
+        this.renderAsync();
     }
 
     lookForward() {
-        if (this.position.direction % 2 === 1) {
-            return this.maze.getCell(this.position.x, this.position.y + this.position.direction - 2);
+        if (this.direction % 2 === 1) {
+            return this.maze.getCell(this.x, this.y + this.direction - 2);
         } else {
-            return this.maze.getCell(this.position.x + this.position.direction - 1, this.position.y);
+            return this.maze.getCell(this.x + this.direction - 1, this.y);
         }
     }
 
     moveForward() {
         if (this.lookForward() === "floor" || this.lookForward() === "target") {
-            this.position.moveForward();
+            if (this.direction % 2 === 1) {
+                this.y += this.direction - 2;
+            } else {
+                this.x += this.direction - 1;
+            }
         }
-        this.updatePosition();
+        this.renderAsync();
     }
 
-    updatePosition() {
+    renderAsync() {
         if (this.renderIndex > 100000) {
             throw new Error("Robot ran out of battery (you probably created an infinite loop)!");
         }
-        let position = JSON.parse(JSON.stringify(this.position));
+        let x = this.x;
+        let y = this.y;
+        let direction = this.direction;
         setTimeout(() => {
-            postMessage(position);
+            render(this.maze, x, y, direction);
         }, this.renderIndex * timeout);
         this.renderIndex++;
-    }
-}
-
-class RobotPosition {
-    constructor(x, y, direction) {
-        this.x = x;
-        this.y = y;
-        this.direction = direction; //0 - left, 1 - up, 2 - right, 3 - down
-    }
-    turnRight() {
-        this.direction = (this.direction + 1) % 4;
-    }
-
-    turnLeft() {
-        this.direction = (this.direction + 3) % 4;
-    }
-
-    moveForward() {
-        if (this.direction % 2 === 1) {
-            this.y += this.direction - 2;
-        } else {
-            this.x += this.direction - 1;
-        }
     }
 }

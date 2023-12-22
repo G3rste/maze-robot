@@ -1,3 +1,4 @@
+const timeout = 200;
 function solveMaze(robot) {
     while (true) {
         robot.turnRight();
@@ -6,7 +7,7 @@ function solveMaze(robot) {
         }
         if (robot.lookForward() === "target") {
             robot.moveForward();
-            //break;
+            break;
         }
         robot.moveForward();
     }
