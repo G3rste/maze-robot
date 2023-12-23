@@ -1,14 +1,12 @@
-const timeout = 5;
+const timeout = 500; // if the robot is moving to slow, try lowering this value
 function solveMaze(robot) {
-    while (true) {
-        robot.turnRight();
-        while (robot.lookForward() === "wall") {
-            robot.turnLeft();
-        }
-        if (robot.lookForward() === "target") {
-            robot.moveForward();
-            break;
-        }
+    // your code here
+
+    /*
+    if (robot.lookForward() === "floor") {
         robot.moveForward();
     }
+    robot.turnRight();
+    robot.turnLeft();
+    */
 }

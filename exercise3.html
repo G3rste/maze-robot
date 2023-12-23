@@ -12,15 +12,9 @@
     <script src="robot.js"></script>
     <script src="solveMaze.js"></script>
     <script src="render.js"></script>
+    <script src="unsolvableMaze.js"></script>
     <script>
-        let array = [
-            ["wall", "wall", "wall", "wall", "wall"],
-            ["wall", "floor", "floor", "floor", "wall"],
-            ["wall", "floor", "wall", "floor", "wall"],
-            ["wall", "floor", "target", "floor", "wall"],
-            ["wall", "floor", "wall", "floor", "wall"],
-            ["wall", "floor", "floor", "floor", "wall"],
-            ["wall", "wall", "wall", "wall", "wall"]];
+        let array = unsolvableMaze();
         let maze = new Maze(array);
         let robot = new Robot(maze, 1, 1, 2);
         solveMaze(robot);
