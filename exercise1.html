@@ -21,7 +21,6 @@
             ["wall", "floor", "floor", "wall", "wall"],
             ["wall", "wall", "wall", "wall", "wall"]];
         let maze = new Maze(array);
-        postMessage(maze);
         let robot = new Robot(maze, 1, 1, 2);
         solveMaze(robot);
     </script>

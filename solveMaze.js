@@ -1,4 +1,4 @@
-const timeout = 200;
+const timeout = 5;
 function solveMaze(robot) {
     while (true) {
         robot.turnRight();

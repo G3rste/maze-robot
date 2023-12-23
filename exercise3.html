@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="status" class="success"></div>
+    <div id="maze" class="maze"></div>
+    <script src="maze.js"></script>
+    <script src="robot.js"></script>
+    <script src="solveMaze.js"></script>
+    <script src="render.js"></script>
+    <script>
+        let array = [
+            ["wall", "wall", "wall", "wall", "wall"],
+            ["wall", "floor", "floor", "floor", "wall"],
+            ["wall", "floor", "wall", "floor", "wall"],
+            ["wall", "floor", "target", "floor", "wall"],
+            ["wall", "floor", "wall", "floor", "wall"],
+            ["wall", "floor", "floor", "floor", "wall"],
+            ["wall", "wall", "wall", "wall", "wall"]];
+        let maze = new Maze(array);
+        let robot = new Robot(maze, 1, 1, 2);
+        solveMaze(robot);
+    </script>
+</body>
+
+</html>
